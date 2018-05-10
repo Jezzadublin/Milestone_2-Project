@@ -47,16 +47,33 @@
           });
           
         */
-        addMarker({lat:53.3498,lng:-6.2603});
-        addMarker({lat:51.5074,lng:-0.1275});
-        addMarker({lat:48.8566,lng:2.3522});
+        addMarker({coords:{lat:53.3498,lng:-6.2603},
+        content:"<h1>Dublin<h1>"
+        });
+        addMarker({coords:{lat:51.5074,lng:-0.1275},
+        content:"<h1>London<h1>"    
+        });
+        addMarker({coords:{lat:48.8566,lng:2.3522},
+        content:"<h1>Paris<h1>"    
+        });
         
         //Add marker function
-        function addMarker(coords){
+        function addMarker(props){
         var marker = new google.maps.Marker({
-          position:coords, 
+          position:props.coords, 
           map:map,
         }); 
+        
+         var infoWindow = new google.maps.InfoWindow({
+            content:props.content
+            
+        });
+        
+        
+         marker.addListener("mouseover",function(){
+           infoWindow.open(map,marker);
+            
+        });
         }
         } 
     </script>
